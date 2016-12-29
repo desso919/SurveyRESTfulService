@@ -1,5 +1,6 @@
 package com.tu.survey.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,21 +23,20 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tu.survey.aplication.Question;
 import com.tu.survey.aplication.Survey;
+import com.tu.survey.aplication.Surveys;
 
-@Path("/questions")
+@Path("/surveys")
 public class SurveyService {
 	
 	  @GET
 	  @Produces(MediaType.APPLICATION_JSON)
-	  public Response convertFtoC() throws JSONException, JsonProcessingException {		  
+	  public Response convertFtoC() throws JSONException, IOException {		  
 	    ObjectMapper mapper = new ObjectMapper();
-			
-		Survey servey = new Survey(" Best city in Bulgaria");
-		servey.addQuestion(new Question("Question 1" , true, "option 1", "option 2"));
-		servey.addQuestion(new Question("Question 2" , true, "option 1", "option 2"));
+	    
+		Surveys surveys = mapper.readValue(new File("D:\\surveys.json"), Surveys.class);
 
 		//Object to JSON in String
-		String jsonInString = mapper.writeValueAsString(servey);
+		String jsonInString = mapper.writeValueAsString(surveys);
 	
 		return Response.status(200).entity(jsonInString).build();
 	  }

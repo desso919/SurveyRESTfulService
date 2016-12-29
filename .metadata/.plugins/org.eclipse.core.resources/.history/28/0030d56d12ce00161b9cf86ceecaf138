@@ -1,0 +1,17 @@
+package com.tu.survey.client;
+
+import java.util.List;
+import javax.ws.rs.core.MediaType;
+import com.sun.jersey.api.client.*;
+public class SurveyClient {
+
+	public static void main(String[] args) {
+		 Client client = Client.create();
+	        WebResource resource = client.resource("http://localhost:8080/SurveyRESTfulService/survey/questions");
+	 
+	        // Get response as String
+	        Survey string = resource.accept(MediaType.APPLICATION_JSON).get(Survey.class);
+	        
+	        System.out.println(string);
+	}
+}

@@ -1,0 +1,8 @@
+package com.tu.survey.client;
+
+public class Client {
+
+	private void mai() {
+		
+	}
+}

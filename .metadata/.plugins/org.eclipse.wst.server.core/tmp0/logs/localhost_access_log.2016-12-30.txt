@@ -1,0 +1,14 @@
+127.0.0.1 - - [30/Dec/2016:00:02:21 +0200] "GET /SurveyRESTfulService/survey/questions HTTP/1.1" 200 266
+127.0.0.1 - - [30/Dec/2016:00:03:34 +0200] "GET /SurveyRESTfulService/survey/questions HTTP/1.1" 200 266
+127.0.0.1 - - [30/Dec/2016:00:05:28 +0200] "GET /SurveyRESTfulService/survey/questions HTTP/1.1" 200 266
+127.0.0.1 - - [30/Dec/2016:00:06:36 +0200] "GET /SurveyRESTfulService/survey/questions HTTP/1.1" 200 266
+127.0.0.1 - - [30/Dec/2016:00:11:33 +0200] "GET /SurveyRESTfulService/survey/questions HTTP/1.1" 200 266
+127.0.0.1 - - [30/Dec/2016:00:12:52 +0200] "GET /SurveyRESTfulService/survey/questions HTTP/1.1" 200 266
+127.0.0.1 - - [30/Dec/2016:00:23:00 +0200] "GET /SurveyRESTfulService/survey/questions HTTP/1.1" 200 266
+127.0.0.1 - - [30/Dec/2016:00:23:56 +0200] "GET /SurveyRESTfulService/survey/questions HTTP/1.1" 200 266
+127.0.0.1 - - [30/Dec/2016:01:08:11 +0200] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [30/Dec/2016:01:08:12 +0200] "GET /SurveyRESTfulService/ HTTP/1.1" 404 1036
+0:0:0:0:0:0:0:1 - - [30/Dec/2016:01:08:31 +0200] "GET /SurveyRESTfulService/survey/surveys HTTP/1.1" 500 6879
+0:0:0:0:0:0:0:1 - - [30/Dec/2016:01:09:13 +0200] "GET /SurveyRESTfulService/survey/surveys HTTP/1.1" 500 7430
+0:0:0:0:0:0:0:1 - - [30/Dec/2016:01:09:49 +0200] "GET /SurveyRESTfulService/survey/surveys HTTP/1.1" 200 538
+127.0.0.1 - - [30/Dec/2016:01:10:01 +0200] "GET /SurveyRESTfulService/survey/surveys HTTP/1.1" 200 538

@@ -1,0 +1,9 @@
+package com.tu.survey.client;
+
+public class Client {
+
+	private void mai() {
+		// TODO Auto-generated method stub
+
+	}
+}

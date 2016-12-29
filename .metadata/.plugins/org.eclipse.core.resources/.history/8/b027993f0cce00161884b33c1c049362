@@ -1,0 +1,25 @@
+package com.tu.survey.client;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.client.Invocation.Builder;   
+
+import com.tu.survey.aplication.Survey;
+
+public class SurveyClient {
+
+	public static void main(String[] args) {
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target("http://localhost:8080/SurveyRESTfulService/survey/questions");
+		
+
+        Builder builder =   target.request();
+        //Response response  = builder.get();
+        String result  = builder.get(String.class);
+//		String response = target.request(MediaType.APPLICATION_JSON).get(String.class);
+		
+		System.out.println(response);
+	}
+}

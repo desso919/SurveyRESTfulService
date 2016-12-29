@@ -1,0 +1,25 @@
+package com.tu.survey.client;
+
+import java.util.List;
+import javax.ws.rs.core.MediaType;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.jersey.api.client.*;
+import com.tu.survey.aplication.Survey;
+
+public class SurveyClient {
+
+	public static void main(String[] args) {
+		ObjectMapper mapper = new ObjectMapper();
+		 Client client = Client.create();
+	        WebResource resource = client.resource("http://localhost:8080/SurveyRESTfulService/survey/questions");
+	 
+	        // Get response as String
+	        String responce = resource.accept(MediaType.APPLICATION_JSON).get(String.class);
+	        
+	        //JSON from String to Object
+	        Survey obj = mapper.readValue(responce, Survey.class)
+	        		
+	        System.out.println(string);
+	}
+}

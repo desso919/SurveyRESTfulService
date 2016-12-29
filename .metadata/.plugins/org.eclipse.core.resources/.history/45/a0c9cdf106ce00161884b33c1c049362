@@ -1,0 +1,25 @@
+package com.tu.survey.client;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tu.survey.aplication.Survey;
+
+public class SurveyClient {
+	
+	
+	public static void main(String[] args) throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+
+		Survey client = ClientBuilder.newClient(); 
+		
+		//JSON from URL to Object
+		Survey obj = mapper.readValue(new URL("http://localhost:8080/SurveyRESTfulService/survey/questions"), Survey.class);
+		
+		System.out.println(obj.getName());
+	}
+}
