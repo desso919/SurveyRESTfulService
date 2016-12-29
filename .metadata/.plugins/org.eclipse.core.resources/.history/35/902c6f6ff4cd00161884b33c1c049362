@@ -1,0 +1,39 @@
+package com.tu.survey.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tu.survey.aplication.*;
+
+@Path("/questions")
+public class SurveyService {
+	
+	  @GET
+	  @Produces("application/json")
+	  public Response convertFtoC() throws JSONException {
+
+		List<Question> questions = new ArrayList<Question>();
+		questions.add(new Question("Question 1" , "option 1", "option 2"));
+		questions.add(new Question("Question 2" , "option 1", "option 2"));
+		Survey servey = new Survey(questions);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		//Object to JSON in String
+		String jsonInString = mapper.writeValueAsString(servey);
+		
+		
+		String result = jsonInString
+		return Response.status(200).entity(result).build();
+	  }
+
+}

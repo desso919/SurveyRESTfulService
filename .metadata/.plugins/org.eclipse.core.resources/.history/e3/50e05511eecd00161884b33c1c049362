@@ -1,0 +1,6 @@
+package com.tu.survey.aplication;
+
+public class Survey {
+
+	private List<Questions> questions;
+}
