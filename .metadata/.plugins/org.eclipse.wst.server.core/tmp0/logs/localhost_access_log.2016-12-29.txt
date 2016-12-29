@@ -1,0 +1,4 @@
+0:0:0:0:0:0:0:1 - - [29/Dec/2016:18:50:39 +0200] "GET /CrunchifyRESTJerseyExample/crunchify/ctofservice/ HTTP/1.1" 404 1092
+127.0.0.1 - - [29/Dec/2016:18:50:39 +0200] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [29/Dec/2016:18:51:06 +0200] "GET /SurveyRESTfulService/survey/ctofservice/ HTTP/1.1" 200 157
+0:0:0:0:0:0:0:1 - - [29/Dec/2016:18:51:10 +0200] "GET /SurveyRESTfulService/survey/ctofservice/35 HTTP/1.1" 200 156
