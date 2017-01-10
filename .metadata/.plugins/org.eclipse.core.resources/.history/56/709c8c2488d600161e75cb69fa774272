@@ -1,0 +1,57 @@
+package com.tu.survey.aplication;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Question {
+	private String question;
+	private List<Answer> options = new ArrayList<Answer>();
+	private boolean multipleAnswers;
+	private boolean openQuestion;
+	
+	public Question() {}
+	
+	public Question(String question) {
+		this.question = question;
+		this.multipleAnswers = false;
+		this.openQuestion = true;
+	}
+	
+	public Question(String question, List<Answer> answers, boolean isMultipleAnswers) {		
+		this.multipleAnswers = isMultipleAnswers;
+		this.openQuestion = false;
+		this.question = question;
+		this.options = answers;
+	}
+	
+	public Question(String question, boolean isMultipleAnswers, String... answers) {
+		this.multipleAnswers = isMultipleAnswers;
+		this.openQuestion = false;
+		
+		for (String answer: answers) {
+			this.options.add(answer);
+		}
+		
+		this.question = question;
+	}
+	
+	public boolean isOpenQuestion() {
+		return openQuestion;
+	}
+
+	public boolean isMultipleAnswers() {
+		return multipleAnswers;
+	}
+	
+	public String getQuestion() {
+		return question;
+	}
+
+	public List<String> getAnswers() {
+		return options;
+	}
+	
+	
+	
+	
+}

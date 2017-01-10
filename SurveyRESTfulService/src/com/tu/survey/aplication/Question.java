@@ -5,7 +5,8 @@ import java.util.List;
 
 public class Question {
 	private String question;
-	private List<String> answers = new ArrayList<String>();
+	private List<Answer> options = new ArrayList<Answer>();
+	private String openAnswer = "";
 	private boolean multipleAnswers;
 	private boolean openQuestion;
 	
@@ -17,19 +18,19 @@ public class Question {
 		this.openQuestion = true;
 	}
 	
-	public Question(String question, List<String> answers, boolean isMultipleAnswers) {		
+	public Question(String question, List<Answer> answers, boolean isMultipleAnswers) {		
 		this.multipleAnswers = isMultipleAnswers;
 		this.openQuestion = false;
 		this.question = question;
-		this.answers = answers;
+		this.options = answers;
 	}
 	
-	public Question(String question, boolean isMultipleAnswers, String... answers) {
+	public Question(String question, boolean isMultipleAnswers, Answer... answers) {
 		this.multipleAnswers = isMultipleAnswers;
 		this.openQuestion = false;
 		
-		for (String answer: answers) {
-			this.answers.add(answer);
+		for (Answer answer: answers) {
+			this.options.add(answer);
 		}
 		
 		this.question = question;
@@ -47,11 +48,15 @@ public class Question {
 		return question;
 	}
 
-	public List<String> getAnswers() {
-		return answers;
+	public List<Answer> getAnswers() {
+		return options;
 	}
-	
-	
-	
-	
+
+	public String getOpenAnswer() {
+		return openAnswer;
+	}
+
+	public void setOpenAnswer(String openAnswer) {
+		this.openAnswer = openAnswer;
+	}
 }

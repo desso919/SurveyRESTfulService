@@ -1,0 +1,44 @@
+package com.tu.survey.service;
+
+import java.io.File;
+import java.io.IOException;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tu.survey.aplication.Surveys;
+
+public class Database {
+
+	private static final String SURVEYS_FILE_NAME = "D:\\surveys.json";
+
+	private static Surveys surveys;
+	
+	static {
+		ObjectMapper mapper = new ObjectMapper();
+
+		try {
+			surveys = mapper.readValue(new File(SURVEYS_FILE_NAME), Surveys.class);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Surveys getAllSurveys() throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+
+		return mapper.readValue(new File(SURVEYS_FILE_NAME), Surveys.class);
+	}
+	
+	public static void getSurvey() {
+		
+	}
+	
+	public static void saveSurvey() {
+		
+	}
+}

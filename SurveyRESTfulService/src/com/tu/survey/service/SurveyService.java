@@ -1,9 +1,6 @@
 package com.tu.survey.service;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -15,44 +12,55 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tu.survey.aplication.Question;
 import com.tu.survey.aplication.Survey;
 import com.tu.survey.aplication.Surveys;
 
 @Path("/surveys")
 public class SurveyService {
-	
-	  @GET
-	  @Produces(MediaType.APPLICATION_JSON)
-	  public Response convertFtoC() throws JSONException, IOException {		  
-	    ObjectMapper mapper = new ObjectMapper();
-	    
-		Surveys surveys = mapper.readValue(new File("D:\\surveys.json"), Surveys.class);
 
-		//Object to JSON in String
-		String jsonInString = mapper.writeValueAsString(surveys);
-	
-		return Response.status(200).entity(jsonInString).build();
-	  }
+	private static final String EMPTY_JSON = "{}";
 
-	  @POST
-	  @Path("/submit")
-	  @Consumes(MediaType.APPLICATION_JSON)
-	  public Response submitSurvey(String data) throws JSONException, JsonParseException, JsonMappingException, IOException {
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllSurveys() throws JSONException, IOException {
+		String surveys = Database.getAllSurveys().toJSON();
+
+		return Response.status(200).entity(surveys).build();
+	}
+
+	@Path("{name}")
+	@GET
+	@Produces("application/json")
+	public Response getSurvey(@PathParam("name") String surveyName)
+			throws JSONException, JsonParseException, JsonMappingException, IOException {
+		Surveys surveys = Database.getAllSurveys();
+
+		if (surveys.containsSurveyWithName(surveyName)) {
+			String survey = Database.getSurvey(surveyName).toJSON();
+
+			return Response.status(200).entity(survey).build();
+		} else {
+			return Response.status(200).entity(EMPTY_JSON).build();
+		}
+	}
+
+	@Path("/submit")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response submitSurvey(final String survey)
+			throws JSONException, JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
-		  
-		//JSON from String to Object
-		if(data != null) {
-		   Survey obj = mapper.readValue(data, Survey.class);
+
+		if (survey != null) {
+			System.out.println(survey);
+			Survey submitedSurvey = mapper.readValue(survey, Survey.class);
+			Database.saveSurvey(submitedSurvey);
 		}
 
-		
-		return Response.status(200).entity("OKeeeee").build();
-	  }
+		return Response.status(200).entity("Œ ").build();
+	}
 }

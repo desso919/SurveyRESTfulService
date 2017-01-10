@@ -1,8 +1,0 @@
-package com.tu.survey.aplication;
-
-import java.util.ArrayList;
-
-public class Surveys {
-
-	private List<Survey> surveys = new ArrayList<Survey>(); 
-}

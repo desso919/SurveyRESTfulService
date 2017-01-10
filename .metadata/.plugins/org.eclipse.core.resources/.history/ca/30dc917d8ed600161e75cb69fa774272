@@ -1,0 +1,150 @@
+package com.tu.survey.client;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Scanner;
+
+import javax.ws.rs.core.MediaType;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
+import com.tu.survey.aplication.Answer;
+import com.tu.survey.aplication.Question;
+import com.tu.survey.aplication.Survey;
+import com.tu.survey.aplication.Surveys;
+
+public class SurveyClient {
+	private static Scanner input = new Scanner(System.in);
+	
+	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
+		
+		Surveys surveys = getAllSurveys();
+
+		while (true) {
+			System.out.println("\n------------------------------------------------------------------------------ \n");
+			System.out.println("Please select a option!");
+
+			System.out.println("1. See all surveys.");
+			System.out.println("2. Start survey.");
+			System.out.println("3. Submit survey.");
+			System.out.println("4. Exit. \n");
+
+			int choice = input.nextInt();
+
+			if (choice == 4) {
+				break;
+			}
+
+			switch (choice) {
+			case 1: {
+				for (Survey survey : surveys.getSurveys()) {
+					printSurvey(survey);
+				}
+			}
+				break;
+			case 2: {
+				System.out.println("Please enter the name of the survey!");
+				// Survey survey = input.nextLine();
+
+				Survey survey = getSurvey("%20Best%20city%20in%20Bulgaria");			
+				printSurvey(survey);
+			}
+				break;
+			case 3: {
+				submitSurvey(surveys.getSurvey(0));
+			}
+				break;
+
+			default:
+				break;
+			}
+		}
+
+
+	}
+
+	private static Surveys getAllSurveys() throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		Client client = Client.create();
+
+		WebResource resource = client.resource("http://localhost:8080/SurveyRESTfulService/survey/surveys");
+
+		// Get response as String
+		String responce = resource.accept(MediaType.APPLICATION_JSON).get(String.class);
+
+		// JSON from String to Object
+		return mapper.readValue(responce, Surveys.class);
+	}
+
+	private static Survey getSurvey(String surveyName) throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		Client client = Client.create();
+
+		WebResource resource = client
+				.resource("http://localhost:8080/SurveyRESTfulService/survey/surveys/" + surveyName);
+
+		// Get response as String
+		String responce = resource.accept(MediaType.APPLICATION_JSON).get(String.class);
+
+		if (responce.equals("{}")) {
+			System.out.println("NULLLLLLL");
+		}
+
+		// JSON from String to Object
+		return mapper.readValue(responce, Survey.class);
+	}
+
+	private static void submitSurvey(Survey survey) throws JsonProcessingException {
+		Client client = Client.create();
+		ObjectMapper mapper = new ObjectMapper();
+
+		String json = mapper.writeValueAsString(survey);
+		WebResource resource = client.resource("http://localhost:8080/SurveyRESTfulService/survey/surveys");
+
+		resource.path("/submit").type(MediaType.APPLICATION_JSON).post(json);
+	}
+
+	private static void printSurvey(Survey survey) {
+		System.out.println(survey.getName());
+		List<Question> questions = survey.getQuestions();
+
+		
+		for (Question question : questions) {
+			System.out.println("\n" + question.getQuestion());
+			
+			if(question.isOpenQuestion()) {
+				System.out.println("Please enter your answer!");
+				question.setOpenAnswer(input.nextLine());								
+			} else {
+				if(question.isMultipleAnswers()) {
+					System.out.println("Please choose one or more!");
+					printAnswers(question);
+				} else {
+					System.out.println("Please choose only one!");
+					printAnswers(question);				
+				}
+			}
+			waitForUserToAnswer();
+		}
+	}
+
+	private static void waitForUserToAnswer() {
+		String answers = input.next();
+		String[] parts = answers.split(",");
+		
+	}
+
+	private static int printAnswers(Question question) {
+		int option = 0;
+		List<Answer> answers = question.getAnswers();
+		for (Answer answer : answers) {
+			System.out.println("   "+ (++option) + ". " + answer.getAnswer());
+		}
+		return option;
+	}
+
+}

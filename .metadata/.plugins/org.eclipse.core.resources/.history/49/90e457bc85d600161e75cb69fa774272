@@ -1,0 +1,11 @@
+package com.tu.survey.aplication;
+
+public class Answer {
+
+	private String answer;
+	private boolean isSelected;
+	
+	public Answer(String answer) {
+		this.answer = answer;
+	}
+}

@@ -3,6 +3,9 @@ package com.tu.survey.aplication;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class Survey {
 
 	private String name;
@@ -33,5 +36,10 @@ public class Survey {
 		if(question != null) {
 			questions.add(question);
 		}
+	}
+	
+	public String toJSON() throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(this);
 	}
 }

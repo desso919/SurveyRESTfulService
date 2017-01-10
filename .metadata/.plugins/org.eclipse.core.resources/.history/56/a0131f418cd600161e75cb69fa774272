@@ -1,0 +1,26 @@
+import java.io.File;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tu.survey.aplication.Answer;
+import com.tu.survey.aplication.Question;
+import com.tu.survey.aplication.Survey;
+import com.tu.survey.aplication.Surveys;
+
+public class DSS {
+
+	public static void main(String[] args) {
+		ObjectMapper mapper = new ObjectMapper();
+		
+		Survey servey = new Survey("Best city in Bulgaria");
+		 servey.addQuestion(new Question("Question 1" , true, new Answer( "option 1"), new Answer( "answer 4")));
+		 servey.addQuestion(new Question("Question 2" , true, new Answer( "option 1"), new Answer( "answer 4")));
+
+		 
+		 Surveys surveys555 = new Surveys();
+		
+		 surveys.addSurvey(servey);
+		 mapper.writeValue(new File("D:\\surveys.json"), surveys);
+
+		 
+	}
+}

@@ -1,0 +1,7 @@
+package com.tu.survey.aplication;
+
+public class Answer {
+
+	private String answer;
+	private boolean isSelected;
+}

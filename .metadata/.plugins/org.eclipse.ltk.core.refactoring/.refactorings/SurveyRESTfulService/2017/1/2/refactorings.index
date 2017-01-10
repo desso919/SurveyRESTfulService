@@ -1,0 +1,15 @@
+1483904828427	Copy package
+1483904919144	Delete element
+1483907815899	Copy compilation unit
+1483909278947	Extract constant 'EMPTY_JSON'
+1483909440447	Rename method 'convertFtoC'
+1483909450588	Rename method 'convertFtoCfromInput'
+1483967864908	Extract constant 'SURVEYS_FILE'
+1483969130970	Delete element
+1483969135643	Delete element
+1483979051369	Rename field 'answers'
+1483979233963	Copy package
+1483983133419	Rename field 'isSelected'
+1483983161179	Rename field 'Selected'
+1483983196556	Copy compilation unit
+1484034833739	Copy package

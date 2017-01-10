@@ -1,0 +1,26 @@
+package com.tu.survey.aplication;
+
+public class Answer {
+
+	private String answer;
+	private boolean Selected;
+	
+	public Answer() {
+		answer = "";
+	}
+	public Answer(String answer) {
+		this.answer = answer;
+	}
+	
+	public boolean isSelected() {
+		return Selected;
+	}
+	
+	public void setAsSelected() {
+		this.Selected = true;
+	}
+	
+	public String getAnswer() {
+		return answer;
+	}
+}

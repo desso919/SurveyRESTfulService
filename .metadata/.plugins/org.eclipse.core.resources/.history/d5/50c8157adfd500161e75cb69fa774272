@@ -1,0 +1,40 @@
+package com.tu.survey.aplication;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Surveys {
+
+	private List<Survey> surveys = new ArrayList<Survey>();
+
+	public List<Survey> getSurveys() {
+		return surveys;
+	}
+
+	public boolean addSurvey(Survey survey) {
+		if (survey != null) {
+			surveys.add(survey);
+			return true;
+		}
+		return false;
+	}
+
+	public Survey getSurvey(int index) {
+		return surveys.get(index);
+	}
+	
+	public Survey getSurvey(String name) {
+		for (Survey survey : surveys) {
+			if(survey.getName().equals(name)) {
+				return survey;
+			}
+		}
+		
+		return null;
+	}
+	
+	public boolean getSurvey(Object survey) {
+		return surveys.contains(survey);
+	}
+}

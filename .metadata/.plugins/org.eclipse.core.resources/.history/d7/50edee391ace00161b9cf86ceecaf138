@@ -1,6 +1,0 @@
-package com.tu.survey.aplication;
-
-public class Surveys {
-
-	private List<Survey> surveys = new ArrayList<Survey>(); 
-}

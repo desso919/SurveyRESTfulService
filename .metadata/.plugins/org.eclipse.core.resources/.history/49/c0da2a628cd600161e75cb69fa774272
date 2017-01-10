@@ -1,0 +1,66 @@
+package com.tu.survey.service;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import org.json.JSONException;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tu.survey.aplication.Survey;
+import com.tu.survey.aplication.Surveys;
+
+@Path("/surveys")
+public class SurveyService {
+
+	private static final String EMPTY_JSON = "{}";
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllSurveys() throws JSONException, IOException {
+		String surveys = Database.getAllSurveys().toJSON();
+
+		return Response.status(200).entity(surveys).build();
+	}
+
+	@Path("{name}")
+	@GET
+	@Produces("application/json")
+	public Response getSurvey(@PathParam("name") String surveyName)
+			throws JSONException, JsonParseException, JsonMappingException, IOException {
+		Surveys surveys = Database.getAllSurveys();
+
+		if (surveys.containsSurveyWithName(surveyName)) {
+			String survey = Database.getSurvey(surveyName).toJSON();
+
+			return Response.status(200).entity(survey).build();
+		} else {
+			return Response.status(200).entity(EMPTY_JSON).build();
+		}
+	}
+
+	@Path("/submit")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response submitSurvey(final String survey)
+			throws JSONException, JsonParseException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+
+		if (survey != null) {
+			Survey submitedSurvey = mapper.readValue(survey, Survey.class);
+			Database.saveSurvey(submitedSurvey);
+		}
+
+		return Response.status(200).entity("Œ ").build();
+	}
+}

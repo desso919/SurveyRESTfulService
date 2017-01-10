@@ -1,0 +1,78 @@
+package com.tu.survey.client;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ws.rs.core.MediaType;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.jersey.api.client.*;
+import com.tu.survey.aplication.Question;
+import com.tu.survey.aplication.Survey;
+import com.tu.survey.aplication.Surveys;
+
+public class SurveyClient {
+
+	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		Client client = Client.create();
+		
+		WebResource resource = client.resource("http://localhost:8080/SurveyRESTfulService/survey/surveys");
+
+		// Get response as String
+		String responce = resource.accept(MediaType.APPLICATION_JSON).get(String.class);
+
+		// JSON from String to Object
+		Surveys surveys = mapper.readValue(responce, Surveys.class);
+
+		for (Survey survey : surveys.getSurveys()) {
+			System.out.println(survey.getName());
+			List<Question> questions = survey.getQuestions();
+			
+			for(Question question: questions) {
+				System.out.println("\n" + question);
+				List<String> answers = question.getAnswers();
+				for(String answer:answers) {
+					System.out.println(answer);
+				}			
+		    }
+		}
+		
+		postRequest(surveys.getSurveys().get(0));
+		
+//		Survey servey = new Survey(" Best city in Bulgaria");
+//		servey.addQuestion(new Question("Question 1" , true, "option 1", "option 2"));
+//		servey.addQuestion(new Question("Question 2" , true, "option 1", "option 2"));
+//		
+//		Survey servey1 = new Survey(" Best city in Bulgaria2");
+//		servey1.addQuestion(new Question("Question 1" , true, "option 1", "option 2"));
+//		servey1.addQuestion(new Question("Question 2" , true, "option 1", "option 2"));
+//
+//		Surveys surveys = new Surveys();
+//		
+//		surveys.addSurvey(servey);
+//		surveys.addSurvey(servey1);
+//		mapper.writeValue(new File("D:\\surveys.json"), surveys);
+		
+//		// Convert JSON string from file to Object
+//		Surveys surveys = mapper.readValue(new File("D:\\surveys.json"), Surveys.class);
+//
+//
+//		for (Survey survey : surveys.getSurveys()) {
+//			System.out.println(survey.getName());
+//		}
+//		
+	}
+
+	private static void postRequest(Survey survey) {
+		Client client = Client.create();
+		
+		WebResource resource = client.resource("http://localhost:8080/SurveyRESTfulService/survey/surveys");
+		
+		resource.path("/submit").type("aplication/json").post(survey);
+	}
+}

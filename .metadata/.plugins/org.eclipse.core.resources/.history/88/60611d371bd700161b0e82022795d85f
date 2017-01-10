@@ -1,0 +1,52 @@
+package com.tu.survey.service;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Collections;
+
+import javax.ws.rs.core.Response;
+
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tu.survey.aplication.Survey;
+import com.tu.survey.aplication.Surveys;
+
+public class Database {
+
+	private static final String SURVEYS_FILE_NAME = "D:\\surveys.json";
+	private static final String SUBMITTED_SURVEYS_FILE_NAME = "D:\\submited_surveys.json";
+
+	private static Surveys surveys;
+	
+	static {
+		ObjectMapper mapper = new ObjectMapper();
+
+		try {
+			surveys = mapper.readValue(new File(SURVEYS_FILE_NAME), Surveys.class);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Surveys getAllSurveys() throws JsonParseException, JsonMappingException, IOException {
+		return surveys;
+	}
+	
+	public static Survey getSurvey(String surveyName) {
+		return surveys.getSurvey(surveyName);
+	}
+	
+	public static void saveSurvey(Survey survey) throws JsonGenerationException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		Surveys allSubmitedSurveys = mapper.readValue(new File(SUBMITTED_SURVEYS_FILE_NAME), Surveys.class);
+		allSubmitedSurveys.addSurvey(survey);
+
+		mapper.writeValue(new File(SUBMITTED_SURVEYS_FILE_NAME), survey);		
+	}
+}
