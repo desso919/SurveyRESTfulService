@@ -55,7 +55,8 @@ public class SurveyService {
 			throws JSONException, JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 
-		if (survey != null) {	
+		if (survey != null) {
+			System.out.println(survey);
 			Survey submitedSurvey = mapper.readValue(survey, Survey.class);
 			Database.saveSurvey(submitedSurvey);
 		}

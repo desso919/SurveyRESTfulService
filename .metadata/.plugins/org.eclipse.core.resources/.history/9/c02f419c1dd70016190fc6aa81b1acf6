@@ -92,9 +92,12 @@ public class SurveyClient {
 		String surveyName = input.nextLine();
 
 		String url = "http://localhost:8080/SurveyRESTfulService/survey/surveys/" + replace(surveyName);
+
 		WebResource resource = client.resource(url);
+
 		String response = resource.accept(MediaType.APPLICATION_JSON).get(String.class);
 
+		System.out.println(response);
 		if (response.equals("{}")) {
 			System.out.println("Could not find survey with this name!");
 			return null;

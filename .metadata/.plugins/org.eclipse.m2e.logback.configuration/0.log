@@ -3195,3 +3195,11 @@
 2017-01-10 11:59:50,422 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Äåñèñëàâ\Documents\GitHub\SurveyService\SurveyRESTfulService\SurveyClient\src\main\resources
 2017-01-10 11:59:50,431 [Worker-5] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1251 actually) to copy filtered resources, i.e. build is platform dependent!
 2017-01-10 11:59:50,441 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Äåñèñëàâ\Documents\GitHub\SurveyService\SurveyRESTfulService\SurveyClient\src\test\resources
+2017-01-10 12:14:51,553 [Worker-13] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1251 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-01-10 12:14:51,565 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Äåñèñëàâ\Documents\GitHub\SurveyService\SurveyRESTfulService\SurveyClient\src\main\resources
+2017-01-10 12:14:51,568 [Worker-13] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1251 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-01-10 12:14:51,577 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Äåñèñëàâ\Documents\GitHub\SurveyService\SurveyRESTfulService\SurveyClient\src\test\resources
+2017-01-10 12:14:55,304 [Worker-13] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1251 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-01-10 12:14:55,311 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Äåñèñëàâ\Documents\GitHub\SurveyService\SurveyRESTfulService\SurveyRESTfulService\src\main\resources
+2017-01-10 12:14:55,315 [Worker-13] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1251 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-01-10 12:14:55,324 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Äåñèñëàâ\Documents\GitHub\SurveyService\SurveyRESTfulService\SurveyRESTfulService\src\test\resources
